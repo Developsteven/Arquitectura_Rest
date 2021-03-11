@@ -1,4 +1,5 @@
 package com.salle.menu.entities;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -15,7 +16,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "USUARIOS")
 public class Usuario implements Serializable {
-	private static final long serialVersionUID = 1265660971450473499L;
+
+	private static final long serialVersionUID = -6519616097007558124L;
 	private int id;
 	private String documento;
 	private String userName;

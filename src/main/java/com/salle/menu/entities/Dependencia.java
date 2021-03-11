@@ -1,21 +1,30 @@
 package com.salle.menu.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table( name = "DEPENDENCIAS" )
-public class Dependencia {
+public class Dependencia implements Serializable{
+	
+	private static final long serialVersionUID = -2375786706547630776L;
 	private int id;
 	private String codigo;
 	private String descripcion;
 	private String cargo;
 	private boolean estado;
 	
-	public Dependencia(){
+	public Dependencia(){   
 		
 	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column( name = "ID", nullable = false)
 	public int getId() {
 		return id;
