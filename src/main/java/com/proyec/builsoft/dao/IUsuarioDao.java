@@ -1,9 +1,8 @@
-package com.salle.menu.dao;
+package com.proyec.builsoft.dao;
 
 import org.springframework.data.repository.CrudRepository;
 
-
-import com.salle.menu.entities.Usuario;
+import com.proyec.builsoft.entities.Usuario;
 
 public interface IUsuarioDao extends CrudRepository<Usuario, Long>{
 	
