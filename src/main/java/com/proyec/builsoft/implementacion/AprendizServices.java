@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.proyec.builsoft.dao.IAprendizDao;
@@ -21,6 +22,7 @@ import com.proyec.builsoft.entities.TipoNovedad;
 import com.proyec.builsoft.entities.Trimestre;
 import com.proyec.builsoft.services.IAprendizServices;
 
+@Service
 public class AprendizServices implements IAprendizServices{
 
 	@Autowired

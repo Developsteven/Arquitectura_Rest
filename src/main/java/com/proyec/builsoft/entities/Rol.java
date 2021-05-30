@@ -21,10 +21,6 @@ public class Rol implements Serializable {
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
 	
-
-	public Rol() {
-
-	}
 	
 	public Long getId() {
 		return id;
@@ -42,10 +38,7 @@ public class Rol implements Serializable {
 		this.nombre = nombre;
 	}
 	
-	@Override
-	public String toString() {
-		return "Rol [id=" + id + ", nombre=" + nombre + "]";
-	}
+	
 	
 	private static final long serialVersionUID = 5603958125489596103L;
 

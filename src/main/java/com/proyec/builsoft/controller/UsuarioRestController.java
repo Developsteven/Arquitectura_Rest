@@ -1,6 +1,7 @@
 package com.proyec.builsoft.controller;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +35,9 @@ import com.proyec.builsoft.services.IUsuarioServices;
 @RestController
 @RequestMapping("/api")
 public class UsuarioRestController {
+	
+	@Autowired
+	private  BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
 	private IUsuarioServices usuarioService;
@@ -68,6 +73,22 @@ public class UsuarioRestController {
 		}
 		
 		try {
+			Rol rol = new Rol();		
+			
+			rol.setId((long) 1);
+			rol.setNombre("ROLE_USER");	
+			
+			List<Rol> listaroles = new ArrayList<>() ;
+			listaroles.add(rol);
+			
+//			if(usuario.getRoles().contains("ROLE_ADMIN"))
+//				rol.setId((long) 2);
+//				rol.setNombre("ROLE_ADMIN");	
+//				listaroles.add(rol);
+//			
+			usuario.setRol(listaroles);
+			usuario.setEstado(true);
+			usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 			
 			usuariotNew = usuarioService.create(usuario);
 			

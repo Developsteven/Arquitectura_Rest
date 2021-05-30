@@ -21,4 +21,5 @@ public interface IUsuarioServices {
 	
 	public List<Rol> findAllRol();
 	
+	public Usuario findByMail(String mail);
 }
