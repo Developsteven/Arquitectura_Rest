@@ -81,6 +81,22 @@ public class UsuarioRestController {
 			List<Rol> listaroles = new ArrayList<>() ;
 			listaroles.add(rol);
 			
+//			userfind = clienteservice.findByEmail(user.getEmail());	
+//			if(userfind == null) {				
+//				if(clienteservice.saveUser(user) == null) {
+//					response.put("response", false);
+//					response.put("message", "No se pudo crear el usuario intenta nuevamente");	
+//				}else {
+//					response.put("response", true);
+//					response.put("message", "El usuario : "+user.getEmail()+" fue creado con éxito,dd verifica tu email para activar tu cuenta");	
+//				}
+//					
+//			    return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
+//			}else {
+//				response.put("response", false);			
+//				response.put("message", "El usuario con el email: "+user.getEmail()+" ya existe, intente con otro");
+//			    return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
+			
 //			if(usuario.getRoles().contains("ROLE_ADMIN"))
 //				rol.setId((long) 2);
 //				rol.setNombre("ROLE_ADMIN");	

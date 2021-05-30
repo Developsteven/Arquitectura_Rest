@@ -1,8 +1,10 @@
 package com.proyec.builsoft.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,10 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -53,8 +58,12 @@ public class Usuario implements Serializable {
 	uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario_id","rol_id"})})
 	private List<Rol> rol;
 	
+	@JsonIgnoreProperties(value={"aprendiz", "hibernateLazyInitializer", "handler"}, allowSetters = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "aprendiz", cascade = CascadeType.ALL)
+	private List<Novedad> novedades;
+	
 	public Usuario() {
-
+		this.novedades = new ArrayList<>();
 	}
 
 	
@@ -126,6 +135,18 @@ public class Usuario implements Serializable {
 	public void setRol(List<Rol> rol) {
 		this.rol = rol;
 	}
+	
+
+
+	public List<Novedad> getNovedades() {
+		return novedades;
+	}
+
+
+	public void setNovedades(List<Novedad> novedades) {
+		this.novedades = novedades;
+	}
+
 
 
 	private static final long serialVersionUID = -6519616097007558124L;
