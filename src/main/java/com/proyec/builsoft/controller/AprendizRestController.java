@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,12 +39,18 @@ public class AprendizRestController {
 	@Autowired
 	private IAprendizServices aprendizServices;
 	
+	@GetMapping("/aprendiz")
+	public List<Aprendiz> index() {
+		return aprendizServices.findAllAprendiz();
+	}
 	
+//	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/aprendiz/page/{page}")
 	public Page<Aprendiz> index(@PathVariable Integer page) {
 		return aprendizServices.findAllAprendiz(PageRequest.of(page, 4));
 	}
 	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/aprendiz/{id}")
 	public ResponseEntity<?> findByid(@PathVariable Long id) {
 
@@ -67,7 +74,7 @@ public class AprendizRestController {
 		return new ResponseEntity<Aprendiz>(aprendiz, HttpStatus.OK);
 	}
 	
-	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@PostMapping("/aprendiz")
 	public ResponseEntity<?> create(@Valid @RequestBody Aprendiz aprendiz, BindingResult result) {
 
@@ -100,7 +107,7 @@ public class AprendizRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	
+	@Secured({"ROLE_ADMIN"})
 	@PutMapping("/aprendiz/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Aprendiz aprendiz, BindingResult result,
 			@PathVariable Long id) {
@@ -152,23 +159,27 @@ public class AprendizRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/aprendiz/tipoDocumentos")
 	public List<TipoDocumento> listarDocumentos() {
 		return aprendizServices.findAllDocumento();
 	}
 	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/aprendiz/fichas")
 	public List<Ficha> listarFichas() {
 		return aprendizServices.findAllFichas();
 	}
 	
 	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/aprendiz/trimestres")
 	public List<Trimestre> listarTrimestres() {
 		return aprendizServices.findAllTrimestres();
 	}
 	
+	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/aprendiz/documento/{term}")
 	public ResponseEntity<?> findByDocuemtno(@PathVariable String term) {
 		

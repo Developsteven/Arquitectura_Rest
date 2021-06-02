@@ -14,11 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,6 +33,9 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario", nullable = false)
 	private Long id;
+	
+	@Column(nullable = false)
+	private String numero;
 	
 	@NotEmpty
 	@Column(nullable = false)
@@ -51,6 +56,11 @@ public class Usuario implements Serializable {
 
 	@Column(nullable = false)
 	private Boolean estado;
+	
+	@NotNull
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_cargo_fk", nullable = false)
+	private Cargo cargo;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="usuarios_roles", joinColumns = @JoinColumn(name="usuario_id"),
@@ -76,6 +86,13 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -147,7 +164,14 @@ public class Usuario implements Serializable {
 		this.novedades = novedades;
 	}
 
+	public Cargo getCargo() {
+		return cargo;
+	}
 
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
 
 	private static final long serialVersionUID = -6519616097007558124L;
 }

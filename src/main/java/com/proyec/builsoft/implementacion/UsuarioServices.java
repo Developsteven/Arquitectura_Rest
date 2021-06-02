@@ -17,8 +17,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.proyec.builsoft.dao.ICargo;
 import com.proyec.builsoft.dao.IRolDao;
 import com.proyec.builsoft.dao.IUsuarioDao;
+import com.proyec.builsoft.entities.Cargo;
 import com.proyec.builsoft.entities.Rol;
 import com.proyec.builsoft.entities.Usuario;
 import com.proyec.builsoft.services.IUsuarioServices;
@@ -34,6 +36,8 @@ public class UsuarioServices implements IUsuarioServices, UserDetailsService{
 	@Autowired
 	private IRolDao rolDao;
 	
+	@Autowired
+	private ICargo cargoDao;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -91,6 +95,12 @@ public class UsuarioServices implements IUsuarioServices, UserDetailsService{
 		return new User(usuario.getMail(), usuario.getPassword(), usuario.getEstado(), true, true, true, authorities);
 	}
 
+	@Override
+	public List<Cargo> findAllCargo() {
+		return (List<Cargo>) cargoDao.findAll();
+	}
+
+	
 
 
 }

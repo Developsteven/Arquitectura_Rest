@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,7 +27,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.proyec.builsoft.dao.ICargo;
 import com.proyec.builsoft.dao.IRolDao;
+import com.proyec.builsoft.entities.Cargo;
 import com.proyec.builsoft.entities.Rol;
 import com.proyec.builsoft.entities.Usuario;
 import com.proyec.builsoft.services.IUsuarioServices;
@@ -45,15 +48,21 @@ public class UsuarioRestController {
 	@Autowired
 	private IRolDao rolDao;
 	
+	@Autowired
+	private ICargo cargoDao;
+	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/usuario")
 	public List<Usuario> index() {
 		return usuarioService.findAll();
 	}
 	
+	
 	@GetMapping("/usuario/page/{page}")
 	public Page<Usuario> index(@PathVariable Integer page) {
 		return usuarioService.findAll(PageRequest.of(page, 4));
 	}
+	
 	
 	@PostMapping("/usuario")
 	public ResponseEntity<?> create(@Valid @RequestBody Usuario usuario, BindingResult result) {
@@ -81,20 +90,20 @@ public class UsuarioRestController {
 			List<Rol> listaroles = new ArrayList<>() ;
 			listaroles.add(rol);
 			
-//			userfind = clienteservice.findByEmail(user.getEmail());	
+//			userfind = usuarioService.findByMail(usuario.getMail());	
 //			if(userfind == null) {				
-//				if(clienteservice.saveUser(user) == null) {
+//				if(usuarioService.create(usuario) == null) {
 //					response.put("response", false);
 //					response.put("message", "No se pudo crear el usuario intenta nuevamente");	
 //				}else {
 //					response.put("response", true);
-//					response.put("message", "El usuario : "+user.getEmail()+" fue creado con éxito,dd verifica tu email para activar tu cuenta");	
+//					response.put("message", "El usuario : "+usuario.getNombre()+" fue creado con éxito");	
 //				}
 //					
 //			    return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
 //			}else {
 //				response.put("response", false);			
-//				response.put("message", "El usuario con el email: "+user.getEmail()+" ya existe, intente con otro");
+//				response.put("message", "El usuario con el email: "+usuario.getMail()+" ya existe, intente con otro");
 //			    return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 			
 //			if(usuario.getRoles().contains("ROLE_ADMIN"))
@@ -120,6 +129,7 @@ public class UsuarioRestController {
 	}
 	
 	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/usuario/{id}")
 	public ResponseEntity<?> findByid(@PathVariable Long id) {
 		
@@ -144,6 +154,7 @@ public class UsuarioRestController {
 	}
 	
 	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@PutMapping("/usuario/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Usuario usuario, BindingResult result, @PathVariable Long id){
 		
@@ -192,10 +203,15 @@ public class UsuarioRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/usuario/rol")
 	public List<Rol> listarRoles() {
 		return (List<Rol>) rolDao.findAll();
 	}
 	
+	@GetMapping("/usuario/cargo")
+	public List<Cargo> findAllCargo() {
+		return (List<Cargo>) cargoDao.findAll();
+	}
 	
 }

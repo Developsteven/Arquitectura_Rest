@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.proyec.builsoft.entities.Cargo;
 import com.proyec.builsoft.entities.Rol;
 import com.proyec.builsoft.entities.Usuario;
 
@@ -22,4 +23,6 @@ public interface IUsuarioServices {
 	public List<Rol> findAllRol();
 	
 	public Usuario findByMail(String mail);
+	
+	public List<Cargo> findAllCargo();
 }
