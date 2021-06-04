@@ -90,32 +90,34 @@ public class UsuarioRestController {
 			List<Rol> listaroles = new ArrayList<>() ;
 			listaroles.add(rol);
 			
-//			userfind = usuarioService.findByMail(usuario.getMail());	
-//			if(userfind == null) {				
-//				if(usuarioService.create(usuario) == null) {
-//					response.put("response", false);
-//					response.put("message", "No se pudo crear el usuario intenta nuevamente");	
-//				}else {
-//					response.put("response", true);
-//					response.put("message", "El usuario : "+usuario.getNombre()+" fue creado con éxito");	
-//				}
-//					
-//			    return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
-//			}else {
-//				response.put("response", false);			
-//				response.put("message", "El usuario con el email: "+usuario.getMail()+" ya existe, intente con otro");
-//			    return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
+			usuario.setRol(listaroles);
+			usuario.setEstado(true);
+			usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 			
+			usuariotNew = usuarioService.findByMail(usuario.getMail());	
+			if(usuariotNew == null) {				
+				if(usuarioService.create(usuario) == null) {
+					response.put("response", false);
+					response.put("mensaje", "No se pudo crear el usuario intenta nuevamente");	
+				}else {
+					response.put("response", true);
+					response.put("mensaje", "El usuario  fue creado con éxito");
+					response.put("usuario", usuariotNew);
+				}
+					
+			    return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
+			}else {
+				response.put("response", false);			
+				response.put("mensaje", "El usuario con el email: "+usuario.getMail()+" ya existe, intente con otro");
+			    return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
+			}
 //			if(usuario.getRoles().contains("ROLE_ADMIN"))
 //				rol.setId((long) 2);
 //				rol.setNombre("ROLE_ADMIN");	
 //				listaroles.add(rol);
 //			
-			usuario.setRol(listaroles);
-			usuario.setEstado(true);
-			usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-			
-			usuariotNew = usuarioService.create(usuario);
+					
+//			usuariotNew = usuarioService.create(usuario);
 			
 		} catch(DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos");
@@ -123,9 +125,9 @@ public class UsuarioRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "El usuario ha sido creado con éxito!");
-		response.put("usuario", usuariotNew);
-		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+//		response.put("mensaje", "El usuario ha sido creado con éxito!");
+//		response.put("usuario", usuariotNew);
+//		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
 	
