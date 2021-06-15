@@ -109,13 +109,13 @@ public class UsuarioRestController {
 			}else {
 				response.put("response", false);			
 				response.put("mensaje", "El usuario con el email: "+usuario.getMail()+" ya existe, intente con otro");
-			    return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
+			    return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
 			}
 //			if(usuario.getRoles().contains("ROLE_ADMIN"))
 //				rol.setId((long) 2);
 //				rol.setNombre("ROLE_ADMIN");	
 //				listaroles.add(rol);
-//			
+//			https://www.udemy.com/course/angular-spring/learn/lecture/13053774#questions/6139128
 					
 //			usuariotNew = usuarioService.create(usuario);
 			
@@ -191,6 +191,7 @@ public class UsuarioRestController {
 			usuarioActual.setEstado(usuario.getEstado());
 			usuarioActual.setCargo(usuario.getCargo());
 			usuarioActual.setRol(usuario.getRol());
+			usuarioActual.setPassword(passwordEncoder.encode(usuario.getPassword()));
 
 			usuarioUpdated = usuarioService.create(usuarioActual);
 

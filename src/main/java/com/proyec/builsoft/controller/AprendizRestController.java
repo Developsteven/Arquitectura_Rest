@@ -185,6 +185,7 @@ public class AprendizRestController {
 		
 		Aprendiz aprendiz = null;
 		Map<String, Object> response = new HashMap<>();
+		
 		try {
 
 			aprendiz = aprendizServices.findByDocumento(term);
