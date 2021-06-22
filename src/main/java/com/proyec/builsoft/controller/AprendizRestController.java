@@ -47,7 +47,7 @@ public class AprendizRestController {
 //	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/aprendiz/page/{page}")
 	public Page<Aprendiz> index(@PathVariable Integer page) {
-		return aprendizServices.findAllAprendiz(PageRequest.of(page, 4));
+		return aprendizServices.findAllAprendiz(PageRequest.of(page, 5));
 	}
 	
 	@Secured({"ROLE_ADMIN","ROLE_USER"})

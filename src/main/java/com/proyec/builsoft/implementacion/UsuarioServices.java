@@ -100,7 +100,5 @@ public class UsuarioServices implements IUsuarioServices, UserDetailsService{
 		return (List<Cargo>) cargoDao.findAll();
 	}
 
-	
-
 
 }

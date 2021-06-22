@@ -25,4 +25,5 @@ public interface IUsuarioServices {
 	public Usuario findByMail(String mail);
 	
 	public List<Cargo> findAllCargo();
+	
 }

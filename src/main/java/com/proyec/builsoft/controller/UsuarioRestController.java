@@ -82,15 +82,23 @@ public class UsuarioRestController {
 		}
 		
 		try {
-			Rol rol = new Rol();		
+			Rol rol = new Rol();
+
+//			if(usuario.getRol().contains("admin")) {
+//				rol.setId((long) 2);
+//				rol.setNombre("ROLE_ADMIN");
+//			}
+			
+//			rol.setId((long) 2);
+//			rol.setNombre("ROLE_ADMIN");
 			
 			rol.setId((long) 1);
-			rol.setNombre("ROLE_USER");	
+			rol.setNombre("ROLE_USER");
+				
+			List<Rol> listaRoles = new ArrayList<>() ;
+			listaRoles.add(rol);
 			
-			List<Rol> listaroles = new ArrayList<>() ;
-			listaroles.add(rol);
-			
-			usuario.setRol(listaroles);
+			usuario.setRol(listaRoles);
 			usuario.setEstado(true);
 			usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 			
@@ -102,20 +110,16 @@ public class UsuarioRestController {
 				}else {
 					response.put("response", true);
 					response.put("mensaje", "El usuario  fue creado con éxito");
-					response.put("usuario", usuariotNew);
-				}
 					
+				}
+				response.put("usuario", usuariotNew);	
 			    return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
 			}else {
 				response.put("response", false);			
 				response.put("mensaje", "El usuario con el email: "+usuario.getMail()+" ya existe, intente con otro");
 			    return new ResponseEntity<Map<String,Object>>(response,HttpStatus.BAD_REQUEST);
 			}
-//			if(usuario.getRoles().contains("ROLE_ADMIN"))
-//				rol.setId((long) 2);
-//				rol.setNombre("ROLE_ADMIN");	
-//				listaroles.add(rol);
-//			https://www.udemy.com/course/angular-spring/learn/lecture/13053774#questions/6139128
+			
 					
 //			usuariotNew = usuarioService.create(usuario);
 			
