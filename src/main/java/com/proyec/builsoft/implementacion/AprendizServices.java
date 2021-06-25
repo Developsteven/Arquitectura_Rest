@@ -11,12 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.proyec.builsoft.dao.IAprendizDao;
 import com.proyec.builsoft.dao.IFichaDao;
 import com.proyec.builsoft.dao.INovedadDao;
+import com.proyec.builsoft.dao.IPrograma;
 import com.proyec.builsoft.dao.ITipoDocumentoDao;
 import com.proyec.builsoft.dao.ITipoNovedadDao;
 import com.proyec.builsoft.dao.ITrimestreDao;
 import com.proyec.builsoft.entities.Aprendiz;
 import com.proyec.builsoft.entities.Ficha;
 import com.proyec.builsoft.entities.Novedad;
+import com.proyec.builsoft.entities.Programa;
 import com.proyec.builsoft.entities.TipoDocumento;
 import com.proyec.builsoft.entities.TipoNovedad;
 import com.proyec.builsoft.entities.Trimestre;
@@ -42,6 +44,9 @@ public class AprendizServices implements IAprendizServices{
 	
 	@Autowired
 	private ITipoNovedadDao tipoNovedadDao;
+	
+	@Autowired
+	private IPrograma programaDao;
 	
 	
 	@Override
@@ -108,6 +113,12 @@ public class AprendizServices implements IAprendizServices{
 	@Transactional(readOnly = true)
 	public Aprendiz findByDocumento(String term) {
 		return aprendizDao.findByDocumento(term);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Programa> findAllProgramas() {
+		return (List<Programa>) programaDao.findAll();
 	}
 
 }

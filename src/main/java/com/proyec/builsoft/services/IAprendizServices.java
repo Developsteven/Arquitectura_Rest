@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.proyec.builsoft.entities.Aprendiz;
 import com.proyec.builsoft.entities.Ficha;
 import com.proyec.builsoft.entities.Novedad;
+import com.proyec.builsoft.entities.Programa;
 import com.proyec.builsoft.entities.TipoDocumento;
 import com.proyec.builsoft.entities.TipoNovedad;
 import com.proyec.builsoft.entities.Trimestre;
@@ -36,4 +37,6 @@ public interface IAprendizServices {
 	public List<TipoNovedad> findAllTipoNovedad();
 	
 	public Aprendiz findByDocumento(String term);
+	
+	public List<Programa> findAllProgramas();
 }

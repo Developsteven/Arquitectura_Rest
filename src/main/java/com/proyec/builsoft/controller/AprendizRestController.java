@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.proyec.builsoft.entities.Aprendiz;
 import com.proyec.builsoft.entities.Ficha;
+import com.proyec.builsoft.entities.Programa;
 import com.proyec.builsoft.entities.TipoDocumento;
 import com.proyec.builsoft.entities.Trimestre;
 import com.proyec.builsoft.services.IAprendizServices;
@@ -201,5 +202,11 @@ public class AprendizRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Aprendiz>(aprendiz, HttpStatus.OK);
+	}
+	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	@GetMapping("/aprendiz/programas")
+	public List<Programa> listarProgramas() {
+		return (List<Programa>) aprendizServices.findAllProgramas();
 	}
 }
