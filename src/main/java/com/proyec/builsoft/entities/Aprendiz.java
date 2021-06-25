@@ -61,6 +61,11 @@ public class Aprendiz implements Serializable{
 	private Ficha ficha;
 	
 	@NotNull
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_programa_fk")
+	private Programa programa;
+	
+	@NotNull
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_trimestre_fk")
@@ -156,6 +161,13 @@ public class Aprendiz implements Serializable{
 		this.novedades = novedades;
 	}
 
+	public Programa getPrograma() {
+		return programa;
+	}
+
+	public void setPrograma(Programa programa) {
+		this.programa = programa;
+	}
 
 	private static final long serialVersionUID = 1L;
 
