@@ -20,14 +20,6 @@ public class Ficha implements Serializable {
 	private Long id;
 
 	@NotEmpty
-	@Column(nullable = false)
-	private String nombre;
-
-	@NotEmpty
-	@Column(nullable = false, unique = true)
-	private String siglas;
-
-	@NotEmpty
 	@Column(name = "numero_ficha", nullable = false, unique = true)
 	private String numero;
 
@@ -41,22 +33,6 @@ public class Ficha implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getSiglas() {
-		return siglas;
-	}
-
-	public void setSiglas(String siglas) {
-		this.siglas = siglas;
 	}
 
 	public String getNumero() {
