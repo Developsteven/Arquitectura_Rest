@@ -145,6 +145,7 @@ public class AprendizRestController {
 			aprendizActual.setTipoDocumento(aprendiz.getTipoDocumento());
 			aprendizActual.setFicha(aprendiz.getFicha());
 			aprendizActual.setTrimestre(aprendiz.getTrimestre());
+			aprendizActual.setPrograma(aprendiz.getPrograma());
 
 			aprendizUpdated = aprendizServices.createAprendiz(aprendizActual);
 
