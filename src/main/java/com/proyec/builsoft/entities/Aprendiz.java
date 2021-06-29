@@ -47,6 +47,7 @@ public class Aprendiz implements Serializable{
 	@Column( nullable = false, unique = true)
 	private String mail;
 	
+	@NotNull
 	@Column( nullable = false)
 	private String telefono;
 	
