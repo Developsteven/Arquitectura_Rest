@@ -47,7 +47,7 @@ public class NovedadRestController {
 		return aprendizServices.findAllTipoNovedad();
 	}
 	
-	@GetMapping("/novedades/observacion")
+	@GetMapping("/observacion")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Observacion> listarObservacion() {
 		return aprendizServices.findAllObservacion();

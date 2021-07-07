@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,7 +28,7 @@ public class Observacion implements Serializable{
 	private Long id;
 	
 	@Column(nullable = false)
-	private String observacion;
+	private String descripcion;
 	
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
@@ -37,6 +38,12 @@ public class Observacion implements Serializable{
 	@JoinColumn(name="id_novedad_fk")
 	private Novedad novedad;
 	
+	@JsonIgnoreProperties(value={"observaciones","hibernateLazyInitializer", "handler"}, allowSetters = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="id_usuario_fk")
+	private Usuario usuario;
+	
+	@PrePersist
 	public void asignarfecha() {
 		this.fecha = new Date();
 	}
@@ -52,13 +59,13 @@ public class Observacion implements Serializable{
 	}
 
 
-	public String getObservacion() {
-		return observacion;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
 
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 
@@ -79,6 +86,16 @@ public class Observacion implements Serializable{
 
 	public void setNovedad(Novedad novedad) {
 		this.novedad = novedad;
+	}
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 
