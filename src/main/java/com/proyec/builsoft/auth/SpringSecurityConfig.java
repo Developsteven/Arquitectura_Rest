@@ -41,8 +41,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 		.anyRequest().authenticated()
 		.and()
-		.csrf().disable()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		.csrf().disable() //falsificacion de credenciales
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // no necesitamos sesion ya que utiliamos tokens
 	}
 
 }
