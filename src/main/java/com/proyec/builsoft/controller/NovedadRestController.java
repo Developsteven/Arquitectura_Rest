@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyec.builsoft.entities.Novedad;
+import com.proyec.builsoft.entities.Observacion;
 import com.proyec.builsoft.entities.TipoNovedad;
 import com.proyec.builsoft.services.IAprendizServices;
 
@@ -44,5 +45,17 @@ public class NovedadRestController {
 	@ResponseStatus(HttpStatus.OK)
 	public List<TipoNovedad> listarTipoNovedad() {
 		return aprendizServices.findAllTipoNovedad();
+	}
+	
+	@GetMapping("/novedades/observacion")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Observacion> listarObservacion() {
+		return aprendizServices.findAllObservacion();
+	}
+	
+	@PostMapping("/observacion")
+	@ResponseStatus( HttpStatus.CREATED)
+	public Observacion crearObservacion(@RequestBody Observacion observacion) {
+		return aprendizServices.crearObservacion(observacion);
 	}
 }
