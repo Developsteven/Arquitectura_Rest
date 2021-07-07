@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.proyec.builsoft.entities.Aprendiz;
 import com.proyec.builsoft.entities.Ficha;
 import com.proyec.builsoft.entities.Novedad;
+import com.proyec.builsoft.entities.Observacion;
 import com.proyec.builsoft.entities.Programa;
 import com.proyec.builsoft.entities.TipoDocumento;
 import com.proyec.builsoft.entities.TipoNovedad;
@@ -39,4 +40,8 @@ public interface IAprendizServices {
 	public Aprendiz findByDocumento(String term);
 	
 	public List<Programa> findAllProgramas();
+	
+	public Observacion crearObservacion(Observacion observacion);
+	
+	public List<Observacion> findAllObservacion();
 }

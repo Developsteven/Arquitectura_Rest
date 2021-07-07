@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.proyec.builsoft.dao.IAprendizDao;
 import com.proyec.builsoft.dao.IFichaDao;
 import com.proyec.builsoft.dao.INovedadDao;
+import com.proyec.builsoft.dao.IObservacion;
 import com.proyec.builsoft.dao.IPrograma;
 import com.proyec.builsoft.dao.ITipoDocumentoDao;
 import com.proyec.builsoft.dao.ITipoNovedadDao;
@@ -18,6 +19,7 @@ import com.proyec.builsoft.dao.ITrimestreDao;
 import com.proyec.builsoft.entities.Aprendiz;
 import com.proyec.builsoft.entities.Ficha;
 import com.proyec.builsoft.entities.Novedad;
+import com.proyec.builsoft.entities.Observacion;
 import com.proyec.builsoft.entities.Programa;
 import com.proyec.builsoft.entities.TipoDocumento;
 import com.proyec.builsoft.entities.TipoNovedad;
@@ -48,6 +50,8 @@ public class AprendizServices implements IAprendizServices{
 	@Autowired
 	private IPrograma programaDao;
 	
+	@Autowired
+	private IObservacion observacionDao;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -119,6 +123,16 @@ public class AprendizServices implements IAprendizServices{
 	@Transactional(readOnly = true)
 	public List<Programa> findAllProgramas() {
 		return (List<Programa>) programaDao.findAll();
+	}
+
+	@Override
+	public Observacion crearObservacion(Observacion observacion) {
+		return observacionDao.save(observacion);
+	}
+
+	@Override
+	public List<Observacion> findAllObservacion() {
+		return (List<Observacion>) observacionDao.findAll();
 	}
 
 }
